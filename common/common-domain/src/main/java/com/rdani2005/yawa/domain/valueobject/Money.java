@@ -28,6 +28,10 @@ public class Money {
         return new Money(setScale(this.amount.subtract(money.getAmount())));
     }
 
+    public Money add(Money money) {
+        return new Money(setScale(this.amount.add(money.getAmount())));
+    }
+
     public Money multiply(int multiplier) {
         return new Money(setScale(this.amount.multiply(new BigDecimal(multiplier))));
     }

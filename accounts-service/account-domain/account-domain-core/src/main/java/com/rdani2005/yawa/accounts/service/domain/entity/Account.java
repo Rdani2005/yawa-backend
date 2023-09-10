@@ -7,8 +7,12 @@ import com.rdani2005.yawa.domain.valueobject.CustomerId;
 import com.rdani2005.yawa.domain.valueobject.Money;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
+/**
+ * Represents an Account entity in the domain.
+ */
 public class Account extends AggregateRoot<AccountId> {
     private final CustomerId customerId;
     private final Money initialAmount;
@@ -16,39 +20,93 @@ public class Account extends AggregateRoot<AccountId> {
     private final String acocuntNumber;
     private final ZonedDateTime createdAt;
     public static final String FAILURE_MESSAGE_DELIMITER = ",";
+    public static final String UTC = "UTC";
 
     private Account(Builder builder) {
         customerId = builder.customerId;
         initialAmount = builder.initialAmount;
         currentAmount = builder.currentAmount;
-        acocuntNumber = builder.acocuntNumber;
+        acocuntNumber = builder.accocuntNumber;
         createdAt = builder.createdAt;
-        super.setId(builder.id);
     }
 
+    /**
+     * Initializes the account with an initial amount.
+     *
+     * @param initialAmount The initial amount to set for the account.
+     */
     public void initializeAccount(Money initialAmount) {
-        if (initialAmount.isGreaterThanZero()) {
+        if (!initialAmount.isGreaterThanZero()) {
             throw new AccountDomainException("Account cannot be initialized with a < 0 value");
         }
         setId(new AccountId(UUID.randomUUID()));
     }
 
-    public void makeTransaction(Money transactionAmount) {
-        if (transactionAmount.multiply(-1).isGreaterThan(this.currentAmount)) {
+    /**
+     * Makes a transaction on the account by updating the current amount.
+     *
+     * @param transactionAmount The amount to transact.
+     * @throws AccountDomainException If the transaction amount is greater than the current amount.
+     */
+    public void makeTransaction(
+            Money transactionAmount
+    ) throws AccountDomainException {
+        if (transactionAmount.isGreaterThan(this.currentAmount)) {
+
             throw new AccountDomainException("Account cannot be updated with the given amount.");
         }
 
         currentAmount.substract(transactionAmount);
     }
 
-    public static Builder newBuilder() {
-        return new Builder();
+    /**
+     * Makes a deposit on the account by updating the current amount.
+     *
+     * @param amount The amount to transact.
+     */
+    public void makeDeposit(Money amount) {
+        if (!amount.isGreaterThanZero()) {
+            throw new AccountDomainException("Cannot deposit amount, which is less or equals to 0");
+        }
+        currentAmount.add(amount);
     }
 
-    private void validateDeleteAccount() {
+    /**
+     * Validates if the account can be deleted.
+     */
+    public void validateDeleteAccount() {
         if (this.currentAmount.isGreaterThanZero()) {
             throw new AccountDomainException("Account can't be removed because it has money on it");
         }
+    }
+
+    public CustomerId getCustomerId() {
+        return customerId;
+    }
+
+    public Money getInitialAmount() {
+        return initialAmount;
+    }
+
+    public Money getCurrentAmount() {
+        return currentAmount;
+    }
+
+    public String getAcocuntNumber() {
+        return acocuntNumber;
+    }
+
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * Returns a new builder for creating an Account.
+     *
+     * @return A new Builder instance.
+     */
+    public static Builder builder() {
+        return new Builder();
     }
     /**
      * {@code Account} builder static inner class.
@@ -57,7 +115,7 @@ public class Account extends AggregateRoot<AccountId> {
         private CustomerId customerId;
         private Money initialAmount;
         private Money currentAmount;
-        private String acocuntNumber;
+        private String accocuntNumber;
         private ZonedDateTime createdAt;
         private AccountId id;
 
@@ -106,7 +164,7 @@ public class Account extends AggregateRoot<AccountId> {
          * @return a reference to this Builder
          */
         public Builder acocuntNumber(String val) {
-            acocuntNumber = val;
+            accocuntNumber = val;
             return this;
         }
 

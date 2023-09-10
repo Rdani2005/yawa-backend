@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>account-domain-core</module>
+        <module>accounts-application-service</module>
     </modules>
 
     <properties>
