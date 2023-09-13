@@ -20,6 +20,7 @@
     <modules>
         <module>common</module>
         <module>accounts-service</module>
+        <module>infraestructure</module>
     </modules>
 
     <properties>
@@ -35,6 +36,16 @@
             <dependency>
                 <groupId>com.rdani2005.yawa</groupId>
                 <artifactId>common-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>outbox</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>saga</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
