@@ -21,6 +21,7 @@
         <module>common</module>
         <module>infrastructure</module>
         <module>customer-service</module>
+        <module>infrastructure/kafka</module>
     </modules>
 
     <properties>
@@ -56,6 +57,21 @@
             <dependency>
                 <groupId>com.rdani2005.yawa</groupId>
                 <artifactId>customer-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>customer-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>kafka-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>kafka-config-data</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
