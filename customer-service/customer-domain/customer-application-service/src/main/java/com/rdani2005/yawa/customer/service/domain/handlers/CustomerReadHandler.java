@@ -4,7 +4,7 @@ import com.rdani2005.yawa.customer.service.domain.dto.read.CustomerReadDto;
 import com.rdani2005.yawa.customer.service.domain.dto.read.CustomerReadResponseDto;
 import com.rdani2005.yawa.customer.service.domain.dto.read.MultiCustomerReadResponseDto;
 import com.rdani2005.yawa.customer.service.domain.entity.Customer;
-import com.rdani2005.yawa.customer.service.domain.exception.CustomerException;
+import com.rdani2005.yawa.customer.service.domain.exception.CustomerNotFoundException;
 import com.rdani2005.yawa.customer.service.domain.mapper.CustomerDataMapper;
 import com.rdani2005.yawa.customer.service.domain.ports.output.repository.CustomerRepository;
 import com.rdani2005.yawa.domain.valueobject.CustomerId;
@@ -43,7 +43,7 @@ public class CustomerReadHandler {
      * Retrieves and returns a list of all customers stored in the database.
      *
      * @return A {@link MultiCustomerReadResponseDto} containing a list of customer DTOs.
-     * @throws CustomerException If there are no customers in the database.
+     * @throws CustomerNotFoundException If there are no customers in the database.
      */
     @Transactional(readOnly = true)
     public MultiCustomerReadResponseDto readAllCustomers() {
@@ -51,7 +51,7 @@ public class CustomerReadHandler {
         Optional<List<Customer>> customersResponse = customerRepository.getAllCustomers();
         if (customersResponse.isEmpty()) {
             log.error("There are not any customer on database.");
-            throw new CustomerException("There are not any customer on database.");
+            throw new CustomerNotFoundException("There are not any customer on database.");
         }
 
         List<Customer> customers = customersResponse.get();
@@ -69,7 +69,7 @@ public class CustomerReadHandler {
      *
      * @param customerReadDto The DTO containing the customer's unique identifier.
      * @return A {@link CustomerReadResponseDto} representing the customer entity.
-     * @throws CustomerException If a customer with the specified ID is not found in the database.
+     * @throws CustomerNotFoundException If a customer with the specified ID is not found in the database.
      */
     @Transactional(readOnly = true)
     public CustomerReadResponseDto readCustomerById(CustomerReadDto customerReadDto) {
@@ -79,7 +79,7 @@ public class CustomerReadHandler {
         );
         if (customerResponse.isEmpty()) {
             log.error("Could not found customer with id: {}.", customerReadDto.getCustomerId());
-            throw new CustomerException("Could not found customer with id: " + customerReadDto.getCustomerId());
+            throw new CustomerNotFoundException("Could not found customer with id: " + customerReadDto.getCustomerId());
         }
 
         Customer customer = customerResponse.get();

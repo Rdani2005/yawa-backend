@@ -4,7 +4,7 @@ import com.rdani2005.yawa.customer.service.domain.CustomerDomainService;
 import com.rdani2005.yawa.customer.service.domain.dto.delete.CustomerDeleteCommandDto;
 import com.rdani2005.yawa.customer.service.domain.entity.Customer;
 import com.rdani2005.yawa.customer.service.domain.event.CustomerDeletedEvent;
-import com.rdani2005.yawa.customer.service.domain.exception.CustomerException;
+import com.rdani2005.yawa.customer.service.domain.exception.CustomerNotFoundException;
 import com.rdani2005.yawa.customer.service.domain.ports.output.repository.CustomerRepository;
 import com.rdani2005.yawa.domain.valueobject.CustomerId;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ public class CustomerDeleteHelper {
      *
      * @param customerDeleteCommandDto The DTO containing the customer's unique identifier to be deleted.
      * @return A {@link CustomerDeletedEvent} representing the event of deleting the customer entity.
-     * @throws CustomerException If a customer with the specified ID is not found in the database.
+     * @throws CustomerNotFoundException If a customer with the specified ID is not found in the database.
      */
     @Transactional
     public CustomerDeletedEvent deleteCustomer(CustomerDeleteCommandDto customerDeleteCommandDto) {
@@ -52,7 +52,7 @@ public class CustomerDeleteHelper {
         );
         if (customerResponse.isEmpty()) {
             log.error("Could not found customer with id: {}.", customerDeleteCommandDto.getCustomerId());
-            throw new CustomerException(
+            throw new CustomerNotFoundException(
                     "Could not found customer with id: " + customerDeleteCommandDto.getCustomerId()
             );
         }

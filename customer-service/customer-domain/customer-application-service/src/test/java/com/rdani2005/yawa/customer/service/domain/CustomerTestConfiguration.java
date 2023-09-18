@@ -7,6 +7,11 @@ import org.mockito.Mockito;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * The {@code CustomerTestConfiguration} class provides configuration for unit tests related to the customer service domain.
+ * It defines beans for mocking dependencies such as {@link CustomerDomainService}, {@link CustomerCreateMessagePublisher},
+ * {@link CustomerDeletedMessagePublisher}, and {@link CustomerRepository} to isolate the tests and enable dependency injection.
+ */
 @SpringBootApplication(scanBasePackages = "com.rdani2005.yawa")
 public class CustomerTestConfiguration {
     @Bean
