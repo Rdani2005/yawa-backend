@@ -1,6 +1,7 @@
 package com.rdani2005.yawa.customer.service.domain.handlers;
 
 import com.rdani2005.yawa.customer.service.domain.dto.read.CustomerReadDto;
+import com.rdani2005.yawa.customer.service.domain.dto.read.CustomerReadIdentificationCommandDto;
 import com.rdani2005.yawa.customer.service.domain.dto.read.CustomerReadResponseDto;
 import com.rdani2005.yawa.customer.service.domain.dto.read.MultiCustomerReadResponseDto;
 import com.rdani2005.yawa.customer.service.domain.entity.Customer;
@@ -80,6 +81,34 @@ public class CustomerReadHandler {
         if (customerResponse.isEmpty()) {
             log.error("Could not found customer with id: {}.", customerReadDto.getCustomerId());
             throw new CustomerNotFoundException("Could not found customer with id: " + customerReadDto.getCustomerId());
+        }
+
+        Customer customer = customerResponse.get();
+        log.info("Returning customer with id: {}.", customer.getId().getValue());
+        return customerDataMapper.customerToCustomerReadResponse(customer);
+    }
+
+
+    /**
+     * Retrieves and returns a customer entity by its unique identification.
+     *
+     * @param customerReadDto The DTO containing the customer's unique identification.
+     * @return A {@link CustomerReadResponseDto} representing the customer entity.
+     * @throws CustomerNotFoundException If a customer with the specified ID is not found in the database.
+     */
+    @Transactional(readOnly = true)
+    public CustomerReadResponseDto readCustomerByIdentification(
+            CustomerReadIdentificationCommandDto customerReadDto
+    ) {
+        log.info("Requested to read a customer with identification: {}", customerReadDto.getIdentification());
+        Optional<Customer> customerResponse = customerRepository.getCustomerByIdentification(
+                customerReadDto.getIdentification()
+        );
+        if (customerResponse.isEmpty()) {
+            log.error("Could not found customer with identification: {}.", customerReadDto.getIdentification());
+            throw new CustomerNotFoundException(
+                    "Could not found customer with id: " + customerReadDto.getIdentification()
+            );
         }
 
         Customer customer = customerResponse.get();

@@ -65,6 +65,18 @@ public class CustomerRepositoryImpl implements CustomerRepository {
      * {@inheritDoc}
      */
     @Override
+    public Optional<Customer> getCustomerByIdentification(String identification) {
+        return Optional.of(
+                customerDataAccessMapper.customerEntityToCustomer(
+                        customerJpaRepository.getCustomerEntityByIdentification(identification)
+                )
+        );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Optional<List<Customer>> getAllCustomers() {
         return Optional.of(
                 customerJpaRepository

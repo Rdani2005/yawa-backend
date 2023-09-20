@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface CustomerJpaRepository extends JpaRepository<CustomerEntity, UUID> {
+    CustomerEntity getCustomerEntityByIdentification(String identification);
 }

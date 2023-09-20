@@ -5,6 +5,7 @@ import com.rdani2005.yawa.customer.service.domain.dto.create.CustomerCreateRespo
 import com.rdani2005.yawa.customer.service.domain.dto.delete.CustomerDeleteCommandDto;
 import com.rdani2005.yawa.customer.service.domain.dto.delete.CustomerDeleteResponseDto;
 import com.rdani2005.yawa.customer.service.domain.dto.read.CustomerReadDto;
+import com.rdani2005.yawa.customer.service.domain.dto.read.CustomerReadIdentificationCommandDto;
 import com.rdani2005.yawa.customer.service.domain.dto.read.CustomerReadResponseDto;
 import com.rdani2005.yawa.customer.service.domain.dto.read.MultiCustomerReadResponseDto;
 import com.rdani2005.yawa.customer.service.domain.handlers.CustomerCreateHandler;
@@ -78,6 +79,19 @@ public class CustomerApplicationServiceImpl implements CustomerApplicationServic
             CustomerReadDto customerReadDto
     ) {
         return customerReadHandler.readCustomerById(customerReadDto);
+    }
+
+    /**
+     * Retrieves customer information by the provided customer Identification.
+     *
+     * @param customerReadIdentificationCommandDto The DTO containing the customer's unique identification for retrieval.
+     * @return A {@link CustomerReadResponseDto} containing the customer's information.
+     */
+    @Override
+    public CustomerReadResponseDto getCustomerByIdentification(
+            CustomerReadIdentificationCommandDto customerReadIdentificationCommandDto
+    ) {
+        return customerReadHandler.readCustomerByIdentification(customerReadIdentificationCommandDto);
     }
 
     /**

@@ -23,5 +23,13 @@
             <groupId>com.rdani2005.yawa</groupId>
             <artifactId>customer-domain-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.rdani2005.yawa</groupId>
+            <artifactId>kafka-producer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.rdani2005.yawa</groupId>
+            <artifactId>kafka-model</artifactId>
+        </dependency>
     </dependencies>
 </project>

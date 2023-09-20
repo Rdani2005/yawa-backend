@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * The {@code CustomerCreateHelper} class provides helper methods for creating customer entities,
  * including validation and initialization, and interacts with domain services, mappers, and repositories.
@@ -50,6 +52,7 @@ public class CustomerCreateHelper {
      */
     @Transactional
     public CustomerCreatedEvent persistCustomer(CustomerCreateCommandDto customerCreateCommandDto) {
+        checkCustomerWithIdentificationExists(customerCreateCommandDto.getIdentification());
         Customer customer = customerDataMapper
                 .createCustomerCommandToCustomer(customerCreateCommandDto);
         CustomerCreatedEvent customerCreatedEvent = customerDomainService
@@ -62,5 +65,15 @@ public class CustomerCreateHelper {
         }
         log.info("Returning CustomerCreatedEvent for customer id: {}", savedCustomer.getId().getValue());
         return customerCreatedEvent;
+    }
+
+    @Transactional(readOnly = true)
+    public void checkCustomerWithIdentificationExists(
+            String identification
+    ) {
+        Optional<Customer> customer = customerRepository.getCustomerByIdentification(identification);
+        if (customer.isPresent()) {
+            throw  new CustomerException("There is already a customer with identification: " + identification);
+        }
     }
 }
