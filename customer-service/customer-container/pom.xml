@@ -51,6 +51,7 @@
                     <image>
                         <name>${project.groupId}/customer.service:${project.version}</name>
                     </image>
+                    <mainClass>com.rdani2005.yawa.customer.service.domain.CustomerServiceApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

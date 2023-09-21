@@ -14,13 +14,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
-import static com.rdani2005.yawa.customer.service.domain.entity.Customer.UTC;
 
 /**
  * Controller for managing customer-related operations.
@@ -128,7 +124,7 @@ public class CustomerController {
      * @param customerIdentification The customer's identification provided as a path variable.
      * @return ResponseEntity containing the customer information.
      */
-    @GetMapping("/{customerIdentification}")
+    @GetMapping("/byIdentification/{customerIdentification}")
     public ResponseEntity<CustomerReadResponseDto> getCustomerByCustomerIdentification(
             @PathVariable String customerIdentification
     ) {
