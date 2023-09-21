@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
 /**
  * Controller for managing customer-related operations.
@@ -50,7 +51,31 @@ public class CustomerController {
      * @return ResponseEntity containing a list of customer information.
      */
     @GetMapping
-    public ResponseEntity<MultiCustomerReadResponseDto> getAllCustomers() {
+    public ResponseEntity<MultiCustomerReadResponseDto> getAllCustomers(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) ZonedDateTime initialCreatedDate,
+            @RequestParam(required = false) ZonedDateTime finalCreatedDate,
+            @RequestParam(required = false) ZonedDateTime birthday
+            ) {
+        return ResponseEntity.ok(
+                customerApplicationService.getAllCustomersWithFilters(
+                        name,
+                        initialCreatedDate,
+                        finalCreatedDate,
+                        birthday
+                )
+        );
+    }
+
+    /**
+     * Retrieve a list of customers with applied filters.
+     *
+     * @return ResponseEntity containing a list of customer information.
+     */
+    @GetMapping
+    public ResponseEntity<MultiCustomerReadResponseDto> getAllCustomers(
+
+    ) {
         return ResponseEntity.ok(
                 customerApplicationService.getAllCustomers()
         );

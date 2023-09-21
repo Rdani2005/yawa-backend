@@ -11,6 +11,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "customer-service")
 public class CustomerServiceConfigData {
-    private String customerCreatedTopic;
-    private String customerDeletedTopic;
+    private String customerCreatedTopicName;
+    private String customerDeletedTopicName;
 }

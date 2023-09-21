@@ -13,7 +13,10 @@ import com.rdani2005.yawa.customer.service.domain.handlers.CustomerDeleteHandler
 import com.rdani2005.yawa.customer.service.domain.handlers.CustomerReadHandler;
 import com.rdani2005.yawa.customer.service.domain.ports.input.service.CustomerApplicationService;
 
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
+
+import java.time.ZonedDateTime;
 
 /**
  * The {@code CustomerApplicationServiceImpl} class provides an implementation of the {@link CustomerApplicationService}
@@ -102,5 +105,28 @@ public class CustomerApplicationServiceImpl implements CustomerApplicationServic
     @Override
     public MultiCustomerReadResponseDto getAllCustomers() {
         return customerReadHandler.readAllCustomers();
+    }
+
+    /**
+     * Get a list of all customers with applied filters.
+     *
+     * @param name               The customer name filter (optional).
+     * @param initialCreatedDate The initial created date filter (optional).
+     * @param finalCreatedDate   The final created date filter (optional).
+     * @return A response DTO containing a list of customer information.
+     */
+    @Override
+    public MultiCustomerReadResponseDto getAllCustomersWithFilters(
+            @Nullable String name,
+            @Nullable ZonedDateTime initialCreatedDate,
+            @Nullable ZonedDateTime finalCreatedDate,
+            @Nullable ZonedDateTime birthday
+    ) {
+        return customerReadHandler.readAllCustomersWithFilters(
+                name,
+                initialCreatedDate,
+                finalCreatedDate,
+                birthday
+        );
     }
 }

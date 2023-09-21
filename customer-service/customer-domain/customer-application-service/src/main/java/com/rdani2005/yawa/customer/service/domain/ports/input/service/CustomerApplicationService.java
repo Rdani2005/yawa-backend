@@ -8,6 +8,9 @@ import com.rdani2005.yawa.customer.service.domain.dto.read.CustomerReadDto;
 import com.rdani2005.yawa.customer.service.domain.dto.read.CustomerReadIdentificationCommandDto;
 import com.rdani2005.yawa.customer.service.domain.dto.read.CustomerReadResponseDto;
 import com.rdani2005.yawa.customer.service.domain.dto.read.MultiCustomerReadResponseDto;
+import org.springframework.lang.Nullable;
+
+import java.time.ZonedDateTime;
 
 /**
  * Interface defining the application service methods for customer-related operations.
@@ -53,4 +56,19 @@ public interface CustomerApplicationService {
      * @return A response DTO containing a list of customer information.
      */
     MultiCustomerReadResponseDto getAllCustomers();
+
+    /**
+     * Get a list of all customers with applied filters.
+     *
+     * @param name              The customer name filter (optional).
+     * @param initialCreatedDate The initial created date filter (optional).
+     * @param finalCreatedDate   The final created date filter (optional).
+     * @return A response DTO containing a list of customer information.
+     */
+    MultiCustomerReadResponseDto getAllCustomersWithFilters(
+            @Nullable String name,
+            @Nullable ZonedDateTime initialCreatedDate,
+            @Nullable ZonedDateTime finalCreatedDate,
+            @Nullable ZonedDateTime birthday
+    );
 }

@@ -71,6 +71,16 @@
             </dependency>
             <dependency>
                 <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>customer-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>customer-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
                 <artifactId>kafka-model</artifactId>
                 <version>${project.version}</version>
             </dependency>

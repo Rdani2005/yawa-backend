@@ -3,6 +3,7 @@ package com.rdani2005.yawa.customer.service.domain.dto.read;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import java.util.UUID;
  * DTO class for representing customer data in a response.
  */
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 public class CustomerReadResponseDto {
