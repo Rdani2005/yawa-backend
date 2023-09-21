@@ -5,15 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.rdani2005.yawa</groupId>
-        <artifactId>yawa-backend</artifactId>
+        <artifactId>accounts-service</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>accounts-service</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>accounts-domain</module>
-        <module>accounts-domain/accounts-domain-core</module>
-    </modules>
+    <artifactId>accounts-domain</artifactId>
 
 </project>
