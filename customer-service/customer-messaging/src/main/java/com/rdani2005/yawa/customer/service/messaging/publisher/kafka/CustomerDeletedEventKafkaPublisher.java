@@ -54,9 +54,9 @@ public class CustomerDeletedEventKafkaPublisher implements CustomerDeletedMessag
             CustomerAvroModel customerAvroModel = customerMessagingDataMapper
                     .customerDeletedEventToCustomerAvroModel(customerDeletedEvent);
 
-            kafkaProducer.send(customerServiceConfigData.getCustomerDeletedTopic(), customerAvroModel.getId(),
+            kafkaProducer.send(customerServiceConfigData.getCustomerDeletedTopicName(), customerAvroModel.getId(),
                     customerAvroModel,
-                    getCallback(customerServiceConfigData.getCustomerDeletedTopic(), customerAvroModel));
+                    getCallback(customerServiceConfigData.getCustomerDeletedTopicName(), customerAvroModel));
 
             log.info("CustomerCreatedEvent sent to kafka for customer id: {}",
                     customerAvroModel.getId());

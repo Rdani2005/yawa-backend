@@ -10,11 +10,18 @@ import com.rdani2005.yawa.customer.service.domain.dto.read.CustomerReadResponseD
 import com.rdani2005.yawa.customer.service.domain.dto.read.MultiCustomerReadResponseDto;
 import com.rdani2005.yawa.customer.service.domain.ports.input.service.CustomerApplicationService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
+
+import static com.rdani2005.yawa.customer.service.domain.entity.Customer.UTC;
+
 /**
  * Controller for managing customer-related operations.
  */
@@ -50,13 +57,24 @@ public class CustomerController {
      *
      * @return ResponseEntity containing a list of customer information.
      */
-    @GetMapping
+    @GetMapping("/filters")
     public ResponseEntity<MultiCustomerReadResponseDto> getAllCustomers(
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) ZonedDateTime initialCreatedDate,
-            @RequestParam(required = false) ZonedDateTime finalCreatedDate,
-            @RequestParam(required = false) ZonedDateTime birthday
+            @RequestParam(required = false)
+            String name,
+
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            ZonedDateTime initialCreatedDate,
+
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            ZonedDateTime finalCreatedDate,
+
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            ZonedDateTime birthday
             ) {
+
         return ResponseEntity.ok(
                 customerApplicationService.getAllCustomersWithFilters(
                         name,

@@ -54,9 +54,13 @@ public class CustomerRepositoryImpl implements CustomerRepository {
      */
     @Override
     public Optional<Customer> getCustomerById(CustomerId customerId) {
+        CustomerEntity customerEntity = customerJpaRepository.getById(customerId.getValue());
+        if (customerEntity == null) {
+            return Optional.empty();
+        }
         return Optional.of(
                 customerDataAccessMapper.customerEntityToCustomer(
-                        customerJpaRepository.getById(customerId.getValue())
+                        customerEntity
                 )
         );
     }
@@ -66,9 +70,14 @@ public class CustomerRepositoryImpl implements CustomerRepository {
      */
     @Override
     public Optional<Customer> getCustomerByIdentification(String identification) {
+        CustomerEntity customerEntity = customerJpaRepository.getCustomerEntityByIdentification(identification);
+        if (customerEntity == null) {
+            return Optional.empty();
+        }
+
         return Optional.of(
                 customerDataAccessMapper.customerEntityToCustomer(
-                        customerJpaRepository.getCustomerEntityByIdentification(identification)
+                        customerEntity
                 )
         );
     }

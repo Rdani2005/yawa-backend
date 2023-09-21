@@ -54,9 +54,9 @@ public class CustomerCreatedEventKafkaPublisher implements CustomerCreateMessage
             CustomerAvroModel customerAvroModel = customerMessagingDataMapper
                     .customerCreatedEventToCustomerAvroModel(customerCreatedEvent);
 
-            kafkaProducer.send(customerServiceConfigData.getCustomerCreatedTopic(), customerAvroModel.getId(),
+            kafkaProducer.send(customerServiceConfigData.getCustomerCreatedTopicName(), customerAvroModel.getId(),
                     customerAvroModel,
-                    getCallback(customerServiceConfigData.getCustomerCreatedTopic(), customerAvroModel));
+                    getCallback(customerServiceConfigData.getCustomerCreatedTopicName(), customerAvroModel));
 
             log.info("CustomerCreatedEvent sent to kafka for customer id: {}",
                     customerAvroModel.getId());
