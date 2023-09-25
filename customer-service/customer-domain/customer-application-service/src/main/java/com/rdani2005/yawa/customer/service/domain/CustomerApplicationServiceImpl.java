@@ -15,6 +15,8 @@ import com.rdani2005.yawa.customer.service.domain.ports.input.service.CustomerAp
 
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.time.ZonedDateTime;
 
@@ -22,7 +24,8 @@ import java.time.ZonedDateTime;
  * The {@code CustomerApplicationServiceImpl} class provides an implementation of the {@link CustomerApplicationService}
  * interface for managing customer-related operations. It delegates the processing of these operations to specific handlers.
  */
-@Component
+@Validated
+@Service
 public class CustomerApplicationServiceImpl implements CustomerApplicationService {
     private final CustomerCreateHandler customerCreateHandler;
     private final CustomerReadHandler customerReadHandler;

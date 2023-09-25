@@ -14,6 +14,10 @@
     <modules>
         <module>accounts-domain</module>
         <module>accounts-domain/accounts-domain-core</module>
+        <module>accounts-dataaccess</module>
+        <module>accounts-messaging</module>
+        <module>accounts-application</module>
+        <module>accounts-container</module>
     </modules>
 
 </project>

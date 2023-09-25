@@ -81,6 +81,31 @@
             </dependency>
             <dependency>
                 <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>accounts-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>accounts-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>accounts-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>accounts-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>accounts-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
                 <artifactId>kafka-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -92,6 +117,11 @@
             <dependency>
                 <groupId>com.rdani2005.yawa</groupId>
                 <artifactId>kafka-producer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rdani2005.yawa</groupId>
+                <artifactId>kafka-comsumer</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

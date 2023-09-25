@@ -6,6 +6,8 @@ import com.rdani2005.yawa.domain.valueobject.AccountId;
 import com.rdani2005.yawa.domain.valueobject.CustomerId;
 import com.rdani2005.yawa.domain.valueobject.Money;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 /**
@@ -17,6 +19,7 @@ public class Account extends AggregateRoot<AccountId> {
     private final String accountNumber;
     private final Money initialAmount;
     private Money actualAmount;
+    private ZonedDateTime createdAt;
     public static String UTC = "UTC";
 
     /**
@@ -25,6 +28,8 @@ public class Account extends AggregateRoot<AccountId> {
     public void initializeAccount() {
         verifyAccountCreation();
         setId(new AccountId(UUID.randomUUID()));
+        this.actualAmount = this.initialAmount;
+        this.createdAt = ZonedDateTime.now(ZoneId.of(UTC));
     }
 
     /**
@@ -79,6 +84,27 @@ public class Account extends AggregateRoot<AccountId> {
         }
     }
 
+
+    public CustomerId getCustomerId() {
+        return customerId;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public Money getInitialAmount() {
+        return initialAmount;
+    }
+
+    public Money getActualAmount() {
+        return actualAmount;
+    }
+
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
     /**
      * Private constructor used by the builder pattern to create an Account instance.
      *
@@ -101,6 +127,7 @@ public class Account extends AggregateRoot<AccountId> {
         private String accountNumber;
         private Money initialAmount;
         private Money actualAmount;
+        private ZonedDateTime createdAt;
         private AccountId id;
 
         private Builder() {
@@ -162,6 +189,17 @@ public class Account extends AggregateRoot<AccountId> {
          */
         public Builder id(AccountId val) {
             id = val;
+            return this;
+        }
+
+        /**
+         * Sets the {@code createdAt} and returns a reference to this Builder enabling method chaining.
+         *
+         * @param val the {@code createdAt} to set
+         * @return a reference to this Builder
+         */
+        public Builder createdAt(ZonedDateTime val) {
+            createdAt = val;
             return this;
         }
 

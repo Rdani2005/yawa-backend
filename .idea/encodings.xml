@@ -4,11 +4,13 @@
     <file url="file://$PROJECT_DIR$/accounts-service/account-dataacess/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/accounts-service/accounts-application/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/accounts-service/accounts-container/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/accounts-service/accounts-dataaccess/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/accounts-service/accounts-domain/account-domain-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/accounts-service/accounts-domain/accounts-application-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/accounts-service/accounts-domain/accounts-domain-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/accounts-service/accounts-domain/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/accounts-service/accounts-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/accounts-service/accounts-messaging/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/accounts-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/accounts-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/common-application/src/main/java" charset="UTF-8" />

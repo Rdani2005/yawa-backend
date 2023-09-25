@@ -11,11 +11,16 @@ services:
       echo -e 'Deleting kafka topics'
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic customer-created-request --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic customer-deleted-request --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic account-created-request --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic account-deleted-request --delete --if-exists
       
 
       echo -e 'Creating kafka topics'
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic customer-created-request --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic customer-deleted-request --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic account-created-request --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic account-deleted-request --replication-factor 3 --partitions 3
+      
 
 
       echo -e 'Successfully created the following topics:'

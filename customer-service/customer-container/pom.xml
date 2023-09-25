@@ -49,9 +49,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>${project.groupId}/customer.service:${project.version}</name>
+                        <name>${project.groupId}.customer.service:${project.version}</name>
                     </image>
-                    <mainClass>com.rdani2005.yawa.customer.service.domain.CustomerServiceApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
