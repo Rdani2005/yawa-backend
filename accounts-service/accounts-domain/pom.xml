@@ -10,5 +10,9 @@
     </parent>
 
     <artifactId>accounts-domain</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>accounts-application-service</module>
+    </modules>
 
 </project>

@@ -25,6 +25,7 @@ public class Account extends AggregateRoot<AccountId> {
     public void initializeAccount() {
         verifyAccountCreation();
         setId(new AccountId(UUID.randomUUID()));
+        this.actualAmount = this.initialAmount;
     }
 
     /**
@@ -77,6 +78,23 @@ public class Account extends AggregateRoot<AccountId> {
         if (this.actualAmount.isGreaterThanZero()) {
             throw new AccountsDomainException("Account cannot be deleted because it currently have money on it.");
         }
+    }
+
+
+    public CustomerId getCustomerId() {
+        return customerId;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public Money getInitialAmount() {
+        return initialAmount;
+    }
+
+    public Money getActualAmount() {
+        return actualAmount;
     }
 
     /**
