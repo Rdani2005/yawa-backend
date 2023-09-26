@@ -13,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class MultipleAccountsReadCommand {
+public class MultipleCustomerAccountsReadCommand {
     @NotNull
     private final UUID customerId;
 }

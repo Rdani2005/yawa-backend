@@ -4,10 +4,7 @@ import com.rdani2005.yawa.accounts.service.domain.dto.api.create.AccountCreateCo
 import com.rdani2005.yawa.accounts.service.domain.dto.api.create.AccountCreateResponse;
 import com.rdani2005.yawa.accounts.service.domain.dto.api.delete.AccountDeleteCommand;
 import com.rdani2005.yawa.accounts.service.domain.dto.api.delete.AccountDeleteResponse;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.AccountReadResponse;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.MultipleAccountReadResponse;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.MultipleAccountsReadCommand;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.SingleAccountReadCommand;
+import com.rdani2005.yawa.accounts.service.domain.dto.api.read.*;
 import com.rdani2005.yawa.accounts.service.domain.handlers.AccountCreateHandler;
 import com.rdani2005.yawa.accounts.service.domain.handlers.AccountDeleteHandler;
 import com.rdani2005.yawa.accounts.service.domain.handlers.AccountReadHandler;
@@ -69,9 +66,9 @@ public class AccountsApplicationServiceImpl implements AccountsApplicationServic
      */
     @Override
     public MultipleAccountReadResponse readAccountsByCustomer(
-            MultipleAccountsReadCommand multipleAccountsReadCommand
+            MultipleCustomerAccountsReadCommand multipleCustomerAccountsReadCommand
     ) {
-        return accountReadHandler.readAccountsByCustomer(multipleAccountsReadCommand);
+        return accountReadHandler.readAccountsByCustomer(multipleCustomerAccountsReadCommand);
     }
 
     /**
@@ -82,5 +79,13 @@ public class AccountsApplicationServiceImpl implements AccountsApplicationServic
             SingleAccountReadCommand singleAccountReadCommand
     ) {
         return accountReadHandler.readAccountByAccountId(singleAccountReadCommand);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public AllCustomerAccountsReadResponse readAllCustomersAccounts() {
+        return accountReadHandler.readAllCustomersWithAccounts();
     }
 }

@@ -8,7 +8,9 @@ import com.rdani2005.yawa.accounts.service.domain.ports.output.repository.Custom
 import com.rdani2005.yawa.domain.valueobject.CustomerId;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of CustomerRepository that uses Spring Data JPA.
@@ -66,6 +68,20 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public void deleteCustomer(Customer customer) {
         customerJpaRepository.delete(
                 accountsCustomerDataAccessDataMapper.customerToCustomerEntity(customer)
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Optional<List<Customer>> getAllCustomers() {
+        return Optional.of(
+                customerJpaRepository
+                        .findAll()
+                        .stream()
+                        .map(accountsCustomerDataAccessDataMapper::customerEntityToCustomer)
+                        .collect(Collectors.toList())
         );
     }
 }

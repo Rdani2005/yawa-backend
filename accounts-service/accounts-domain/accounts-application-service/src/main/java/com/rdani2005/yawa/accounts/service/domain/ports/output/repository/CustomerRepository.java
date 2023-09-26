@@ -3,6 +3,7 @@ package com.rdani2005.yawa.accounts.service.domain.ports.output.repository;
 import com.rdani2005.yawa.accounts.service.domain.entity.Customer;
 import com.rdani2005.yawa.domain.valueobject.CustomerId;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -30,4 +31,5 @@ public interface CustomerRepository {
      */
     void deleteCustomer(Customer customer);
 
+    Optional<List<Customer>> getAllCustomers();
 }

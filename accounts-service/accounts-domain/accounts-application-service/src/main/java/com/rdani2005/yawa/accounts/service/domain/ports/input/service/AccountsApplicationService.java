@@ -4,10 +4,7 @@ import com.rdani2005.yawa.accounts.service.domain.dto.api.create.AccountCreateCo
 import com.rdani2005.yawa.accounts.service.domain.dto.api.create.AccountCreateResponse;
 import com.rdani2005.yawa.accounts.service.domain.dto.api.delete.AccountDeleteCommand;
 import com.rdani2005.yawa.accounts.service.domain.dto.api.delete.AccountDeleteResponse;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.AccountReadResponse;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.MultipleAccountReadResponse;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.MultipleAccountsReadCommand;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.SingleAccountReadCommand;
+import com.rdani2005.yawa.accounts.service.domain.dto.api.read.*;
 
 /**
  * Interface for managing account-related operations.
@@ -31,10 +28,10 @@ public interface AccountsApplicationService {
     /**
      * Reads multiple accounts associated with a customer.
      *
-     * @param multipleAccountsReadCommand The command to retrieve multiple accounts for a customer.
+     * @param multipleCustomerAccountsReadCommand The command to retrieve multiple accounts for a customer.
      * @return The response containing a list of account details.
      */
-    MultipleAccountReadResponse readAccountsByCustomer(MultipleAccountsReadCommand multipleAccountsReadCommand);
+    MultipleAccountReadResponse readAccountsByCustomer(MultipleCustomerAccountsReadCommand multipleCustomerAccountsReadCommand);
 
     /**
      * Reads a single account based on the provided command.
@@ -44,5 +41,10 @@ public interface AccountsApplicationService {
      */
     AccountReadResponse readAccount(SingleAccountReadCommand singleAccountReadCommand);
 
-
+    /**
+     * Reads a all customers with all their accounts.
+     *
+     * @return The response containing details of the specified account.
+     */
+    AllCustomerAccountsReadResponse readAllCustomersAccounts();
 }

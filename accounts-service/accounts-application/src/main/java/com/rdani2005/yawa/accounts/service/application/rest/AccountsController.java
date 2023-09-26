@@ -4,10 +4,7 @@ import com.rdani2005.yawa.accounts.service.domain.dto.api.create.AccountCreateCo
 import com.rdani2005.yawa.accounts.service.domain.dto.api.create.AccountCreateResponse;
 import com.rdani2005.yawa.accounts.service.domain.dto.api.delete.AccountDeleteCommand;
 import com.rdani2005.yawa.accounts.service.domain.dto.api.delete.AccountDeleteResponse;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.AccountReadResponse;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.MultipleAccountReadResponse;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.MultipleAccountsReadCommand;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.SingleAccountReadCommand;
+import com.rdani2005.yawa.accounts.service.domain.dto.api.read.*;
 import com.rdani2005.yawa.accounts.service.domain.ports.input.service.AccountsApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +24,12 @@ public class AccountsController {
         this.accountsApplicationService = accountsApplicationService;
     }
 
+    @GetMapping
+    public ResponseEntity<AllCustomerAccountsReadResponse> readAllCustomers() {
+        return ResponseEntity.ok(
+                accountsApplicationService.readAllCustomersAccounts()
+        );
+    }
 
     @GetMapping("/{customerId}")
     public ResponseEntity<MultipleAccountReadResponse> getAccountsByCustomer(
@@ -34,7 +37,7 @@ public class AccountsController {
     ) {
         MultipleAccountReadResponse multipleAccountReadResponse =
                 accountsApplicationService.readAccountsByCustomer(
-                        MultipleAccountsReadCommand
+                        MultipleCustomerAccountsReadCommand
                                 .builder()
                                 .customerId(customerId)
                                 .build()

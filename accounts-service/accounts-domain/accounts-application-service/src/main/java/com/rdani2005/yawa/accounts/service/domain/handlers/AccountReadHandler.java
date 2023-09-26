@@ -1,9 +1,6 @@
 package com.rdani2005.yawa.accounts.service.domain.handlers;
 
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.AccountReadResponse;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.MultipleAccountReadResponse;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.MultipleAccountsReadCommand;
-import com.rdani2005.yawa.accounts.service.domain.dto.api.read.SingleAccountReadCommand;
+import com.rdani2005.yawa.accounts.service.domain.dto.api.read.*;
 import com.rdani2005.yawa.accounts.service.domain.entity.Account;
 import com.rdani2005.yawa.accounts.service.domain.entity.Customer;
 import com.rdani2005.yawa.accounts.service.domain.exception.AccountNotFoundException;
@@ -19,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Handler for reading accounts and account-related data.
@@ -50,17 +48,17 @@ public class AccountReadHandler {
     /**
      * Reads all accounts for a specific customer.
      *
-     * @param multipleAccountsReadCommand The command containing customer ID.
+     * @param multipleCustomerAccountsReadCommand The command containing customer ID.
      * @return The response containing customer and account information.
      */
     @Transactional(readOnly = true)
     public MultipleAccountReadResponse readAccountsByCustomer(
-            MultipleAccountsReadCommand multipleAccountsReadCommand
+            MultipleCustomerAccountsReadCommand multipleCustomerAccountsReadCommand
     ) {
-        log.info("Requested to read all accounts for customer: {}", multipleAccountsReadCommand.getCustomerId());
-        Customer customer = verifyCustomerExistence(multipleAccountsReadCommand.getCustomerId());
+        log.info("Requested to read all accounts for customer: {}", multipleCustomerAccountsReadCommand.getCustomerId());
+        Customer customer = verifyCustomerExistence(multipleCustomerAccountsReadCommand.getCustomerId());
         Optional<List<Account>> customerAccounts = accountsRepository.readAccountsByCustomerId(
-                new CustomerId(multipleAccountsReadCommand.getCustomerId())
+                new CustomerId(multipleCustomerAccountsReadCommand.getCustomerId())
         );
 
         if (customerAccounts.isEmpty()) {
@@ -75,6 +73,32 @@ public class AccountReadHandler {
                 .name(customer.getName())
                 .lastName(customer.getLastName())
                 .accounts(dataMapper.accountsToReadResponse(customerAccounts.get()))
+                .build();
+    }
+
+    /**
+     * Reads all customer and their accounts
+     *
+     * @return the response with its information
+     */
+    @Transactional(readOnly = true)
+    public AllCustomerAccountsReadResponse readAllCustomersWithAccounts() {
+        Optional<List<Customer>> customers = customerRepository.getAllCustomers();
+        if (customers.isEmpty()) {
+            throw new AccountNotFoundException("There arent any customers on current context");
+        }
+
+        return AllCustomerAccountsReadResponse
+                .builder()
+                .customers(
+                      customers.get().stream().map(
+                              customer -> this.readAccountsByCustomer(
+                                      MultipleCustomerAccountsReadCommand
+                                              .builder()
+                                              .customerId(customer.getId().getValue())
+                                              .build())
+                      ).collect(Collectors.toList())
+                )
                 .build();
     }
 
