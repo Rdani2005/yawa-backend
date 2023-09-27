@@ -44,5 +44,8 @@
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/transactions-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/transactions-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/transactions-service/transactions-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/transactions-service/transactions-domain/transactions-domain-core/src/main/java" charset="UTF-8" />
   </component>
 </project>

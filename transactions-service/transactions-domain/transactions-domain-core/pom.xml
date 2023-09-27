@@ -5,16 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.rdani2005.yawa</groupId>
-        <artifactId>yawa-backend</artifactId>
+        <artifactId>transactions-service</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>transactions-service</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>transactions-domain</module>
-        <module>transactions-domain/transactions-domain-core</module>
-    </modules>
+    <artifactId>transactions-domain-core</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.rdani2005.yawa</groupId>
+            <artifactId>common-domain</artifactId>
+        </dependency>
+    </dependencies>
 </project>
