@@ -22,6 +22,7 @@
         <module>infrastructure</module>
         <module>customer-service</module>
         <module>accounts-service</module>
+        <module>transactions-service</module>
     </modules>
 
     <properties>
